@@ -17,8 +17,8 @@ public class Franchise {
     private String municipality;
     private String address;
     private Boolean active = true;
-    private Timestamp createdAt;
-    private Timestamp updatedAt;
+    private Timestamp created_at;
+    private Timestamp updated_at;
 
     public Franchise() {
     }
@@ -79,29 +79,27 @@ public class Franchise {
         this.active = active;
     }
 
-    public Timestamp getCreatedAt() {
-        return createdAt;
+    public Timestamp getCreated_at() {
+        return created_at;
     }
 
-    public void setCreatedAt(Timestamp createdAt) {
-        this.createdAt = createdAt;
+    public void setCreated_at(Timestamp created_at) {
+        this.created_at = created_at;
     }
 
-    public Timestamp getUpdatedAt() {
-        return updatedAt;
+    public Timestamp getUpdated_at() {
+        return updated_at;
     }
 
-    public void setUpdatedAt(Timestamp updatedAt) {
-        this.updatedAt = updatedAt;
+    public void setUpdated_at(Timestamp updated_at) {
+        this.updated_at = updated_at;
     }
-
-
 
     @Override
     public String toString() {
         return "Franchise [id=" + id + ", name=" + name + ", country=" + country + ", city=" + city + ", municipality="
-                + municipality + ", address=" + address + ", active=" + active + ", createdAt=" + createdAt
-                + ", updatedAt=" + updatedAt + "]";
+                + municipality + ", address=" + address + ", active=" + active + ", created_at=" + created_at
+                + ", updated_at=" + updated_at + "]";
     }
 
 }

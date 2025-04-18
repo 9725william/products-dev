@@ -1,7 +1,6 @@
 package com.products.demo.api.v1.local.api_franchise.franchise.adapters;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.config.Task;
 import org.springframework.stereotype.Service;
 
 import com.products.demo.api.v1.local.api_franchise.franchise.adapters.bd2.Franchise;
@@ -22,10 +21,9 @@ public class FranchiseAdapter {
             return resp;
         } catch (Exception e) {
             return new ErrorService(
-                    "Ha ocurrido un error guardando la tarea.",
+                    "Ha ocurrido un error guardando la franquicia",
                     e.getMessage(),
-                    myClassName
-            );
+                    myClassName);
         }
     }
 

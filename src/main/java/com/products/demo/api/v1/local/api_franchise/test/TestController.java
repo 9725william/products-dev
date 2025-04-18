@@ -20,9 +20,8 @@ public class TestController {
 
     @GetMapping("")
     public ResponseEntity<?> test(
-            HttpServletRequest req
-    ) {
-        String message = "Backend de demo OK. " + enviroment;
+            HttpServletRequest req) {
+        String message = "Backend demo OK. " + enviroment;
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
 }

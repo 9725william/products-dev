@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.products.demo.api.v1.local.api_franchise.franchise.adapters.FranchiseServicie;
 import com.products.demo.api.v1.local.api_franchise.franchise.adapters.payloads.FranchiseDto;
 import com.products.demo.api.v1.local.api_franchise.logs_franchise.LogFranchiseService;
 import com.products.demo.api.v1.local.api_franchise.utils.ResponseLocal;
@@ -36,8 +35,7 @@ public class FranchiseController {
     public ResponseEntity<?> create(
             @Valid @RequestBody FranchiseDto payload,
             BindingResult bindingResult,
-            HttpServletRequest req
-    ) {
+            HttpServletRequest req) {
         String action = "create";
         ResponseLocal response = new ResponseLocal(logFranchiseService, action);
 
@@ -47,8 +45,7 @@ public class FranchiseController {
                     bindingResult.getAllErrors(),
                     myClassName,
                     payload.toString(),
-                    req
-            );
+                    req);
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
         try {
@@ -58,8 +55,7 @@ public class FranchiseController {
                     "franquicia creada",
                     myClassName,
                     payload.toString(),
-                    req
-            );
+                    req);
             return new ResponseEntity<>(response, httpStatus);
         } catch (Exception e) {
             response.setError(
@@ -69,8 +65,7 @@ public class FranchiseController {
                     UtilsLocal.emptyErrorList(),
                     myClassName,
                     payload.toString(),
-                    req
-            );
+                    req);
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
     }
