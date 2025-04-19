@@ -122,7 +122,7 @@ public class ProductCrontoller {
             BindingResult bindingResult,
             HttpServletRequest req) {
 
-        String action = "update";
+        String action = "updateStock";
         ResponseLocal response = new ResponseLocal();
 
         // Validación de Dto ---------------------------------------------
