@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "fproducts")
+@Table(name = "products")
 public class Product {
 
     @Id
@@ -12,12 +12,12 @@ public class Product {
     private Long id;
 
     private String name;
-    private Long stock ;
+    private Long stock;
     private Boolean active = true;
     private Long sucursal_id;
     private Timestamp created_at;
     private Timestamp updated_at;
-    
+
     public Product() {
     }
 
@@ -83,6 +83,4 @@ public class Product {
                 + sucursal_id + ", created_at=" + created_at + ", updated_at=" + updated_at + "]";
     }
 
-    
-    
 }
