@@ -10,6 +10,7 @@ import com.products.demo.api.v1.local.api_franchise.franchise.adapters.bd2.Franc
 import com.products.demo.api.v1.local.api_franchise.franchise.adapters.payloads.FranchiseDto;
 import com.products.demo.api.v1.local.api_franchise.utils.ErrorService;
 import com.products.demo.api.v1.local.api_franchise.utils.UtilsLocal;
+import com.products.demo.api.v1.local.api_franchise.utils.UtilsService;
 
 @Service
 public class FranchiseServicie {
@@ -34,7 +35,6 @@ public class FranchiseServicie {
             Timestamp nowTimestamp = UtilsLocal.strDateToTimestamp(now, "yyyy-MM-dd HH:mm:ss");
 
             franchise.setCreated_at(nowTimestamp);
-            franchise.setUpdated_at(nowTimestamp);
 
             Object resp = franchiseAdapter.createOrUpdate(franchise);
             return resp;
@@ -45,5 +45,36 @@ public class FranchiseServicie {
                     myClassName);
         }
     }
+
+    public Object update(Long id, FranchiseDto CommisionDto) {
+        try {
+            Object franchiseExist = franchiseAdapter.getById(id);
+            if (UtilsService.isErrorService(franchiseExist))
+                return franchiseExist;
+    
+            if (franchiseExist == null) {
+                return new ErrorService(
+                        "la franquicia que intenta actualizar no existe",
+                        "la franquicia con ID = " + id + " no existe",
+                        myClassName);
+            }
+    
+            Franchise Franchise = new Franchise();
+            Franchise.setId(id);
+            Franchise.setName(CommisionDto.getName()); // Solo actualizar el Nombre de la franqucia y fecha de actualizacion"
+
+            String now = UtilsLocal.getDateTimeNow();
+            Timestamp nowTimestamp = UtilsLocal.strDateToTimestamp(now, "yyyy-MM-dd HH:mm:ss");
+            Franchise.setUpdated_at(nowTimestamp);
+    
+            Object resp = franchiseAdapter.createOrUpdate(Franchise); 
+            return resp;
+        } catch (Exception e) {
+            return new ErrorService(
+                    "Ha ocurrido un error actualizando la franquicia",
+                    e.getMessage(),
+                    myClassName);
+        }
+	}
 
 }

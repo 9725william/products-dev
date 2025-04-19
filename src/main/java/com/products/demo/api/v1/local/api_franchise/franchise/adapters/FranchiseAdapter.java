@@ -1,5 +1,7 @@
 package com.products.demo.api.v1.local.api_franchise.franchise.adapters;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,21 @@ public class FranchiseAdapter {
         } catch (Exception e) {
             return new ErrorService(
                     "Ha ocurrido un error guardando la franquicia",
+                    e.getMessage(),
+                    myClassName);
+        }
+    }
+
+    public Object getById(Long id) {
+        try {
+            Optional<Franchise> resp = franchiseRepository.findById(id);
+            if (!resp.isPresent()) {
+                return null;
+            }
+            return resp.get();
+        } catch (Exception e) {
+            return new ErrorService(
+                    "Ha ocurrido un error buscando el registro",
                     e.getMessage(),
                     myClassName);
         }
