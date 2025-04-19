@@ -77,4 +77,26 @@ public class FranchiseServicie {
         }
 	}
 
+    public Object franchiseTopStock(Long idFranchise) {
+        try {
+
+            Object resp = franchiseAdapter.franchiseTopStock(idFranchise);
+
+            if (resp == null) {
+                return new ErrorService(
+                        "No se encontró el detalle de productos con mayor stock por sucursal con Id:" + String.valueOf(idFranchise),
+                        "",
+                        myClassName,
+                        200);
+            }
+            return resp;
+        } catch (Exception e) {
+            return new ErrorService(
+                    "Ha ocurridFranchiseo un error obteniendo el detalle de productos con mayor stock por sucursal",
+                    e.getMessage(),
+                    myClassName);
+        }
+    }
+    
+
 }
