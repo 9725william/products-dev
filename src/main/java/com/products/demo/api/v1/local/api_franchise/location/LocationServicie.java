@@ -52,21 +52,22 @@ public class LocationServicie {
 
     public Object update(Long id, LocationDto locationDto) {
         try {
-            Object franchiseExist = locationAdapters.getById(id);
-            if (UtilsService.isErrorService(franchiseExist)) {
-                return franchiseExist;
+            Object locationExistObj = locationAdapters.getById(id);
+            if (UtilsService.isErrorService(locationExistObj)) {
+                return locationExistObj;
             }
 
-            if (franchiseExist == null) {
+            if (locationExistObj == null) {
                 return new ErrorService(
-                        "la franquicia que intenta actualizar no existe",
-                        "la franquicia con ID = " + id + " no existe",
+                        "La sucursal que intenta actualizar no existe",
+                        "La sucursal con ID = " + id + " no existe",
                         myClassName);
             }
 
-            Location location = new Location();
-            location.setId(id);
-            location.setName(locationDto.getName()); // Solo actualizar el Nombre de la sucursal y fecha de actulización"
+            Location location = (Location) locationExistObj;
+
+            // Solo actualiza el campo requerido
+            location.setName(locationDto.getName());
 
             String now = UtilsLocal.getDateTimeNow();
             Timestamp nowTimestamp = UtilsLocal.strDateToTimestamp(now, "yyyy-MM-dd HH:mm:ss");
@@ -76,9 +77,10 @@ public class LocationServicie {
             return resp;
         } catch (Exception e) {
             return new ErrorService(
-                    "Ha ocurrido un error actualizando la franquicia",
+                    "Ha ocurrido un error actualizando la sucursal",
                     e.getMessage(),
                     myClassName);
         }
     }
+
 }

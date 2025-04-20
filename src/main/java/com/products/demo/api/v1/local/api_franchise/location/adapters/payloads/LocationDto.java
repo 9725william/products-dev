@@ -2,26 +2,19 @@ package com.products.demo.api.v1.local.api_franchise.location.adapters.payloads;
 
 import jakarta.validation.constraints.*;
 
-
 public class LocationDto {
 
-    @NotBlank(message = "El nombre de la franquicia no puede estar vacío")
     private String name;
 
-    @NotBlank(message = "El país no puede estar vacío")
     private String country;
 
-    @NotBlank(message = "La ciudad no puede estar vacía")
     private String city;
 
-    @NotBlank(message = "El municipio no puede estar vacío")
     private String municipality;
 
-    @NotBlank(message = "La dirección no puede estar vacía")
     private String address;
 
-    @NotNull(message = "el identidicador de la freanquicia no puede estar vacío")
-    private Long franchise_id ;
+    private Long franchise_id;
 
     public LocationDto() {
     }
@@ -79,7 +72,5 @@ public class LocationDto {
         return "LocationDto [name=" + name + ", country=" + country + ", city=" + city + ", municipality="
                 + municipality + ", address=" + address + ", franchise_id=" + franchise_id + "]";
     }
-
-    
 
 }

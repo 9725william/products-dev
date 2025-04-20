@@ -48,26 +48,26 @@ public class FranchiseServicie {
 
     public Object update(Long id, FranchiseDto CommisionDto) {
         try {
-            Object franchiseExist = franchiseAdapter.getById(id);
-            if (UtilsService.isErrorService(franchiseExist))
-                return franchiseExist;
-    
-            if (franchiseExist == null) {
+            Object franchiseExistObj = franchiseAdapter.getById(id);
+            if (UtilsService.isErrorService(franchiseExistObj))
+                return franchiseExistObj;
+
+            if (franchiseExistObj == null) {
                 return new ErrorService(
-                        "la franquicia que intenta actualizar no existe",
-                        "la franquicia con ID = " + id + " no existe",
+                        "La franquicia que intenta actualizar no existe",
+                        "La franquicia con ID = " + id + " no existe",
                         myClassName);
             }
-    
-            Franchise Franchise = new Franchise();
-            Franchise.setId(id);
-            Franchise.setName(CommisionDto.getName()); // Solo actualizar el Nombre de la franqucia y fecha de actualizacion"
+
+            Franchise franchiseExist = (Franchise) franchiseExistObj;
+
+            franchiseExist.setName(CommisionDto.getName());
 
             String now = UtilsLocal.getDateTimeNow();
             Timestamp nowTimestamp = UtilsLocal.strDateToTimestamp(now, "yyyy-MM-dd HH:mm:ss");
-            Franchise.setUpdated_at(nowTimestamp);
-    
-            Object resp = franchiseAdapter.createOrUpdate(Franchise); 
+            franchiseExist.setUpdated_at(nowTimestamp);
+
+            Object resp = franchiseAdapter.createOrUpdate(franchiseExist);
             return resp;
         } catch (Exception e) {
             return new ErrorService(
@@ -75,7 +75,7 @@ public class FranchiseServicie {
                     e.getMessage(),
                     myClassName);
         }
-	}
+    }
 
     public Object franchiseTopStock(Long idFranchise) {
         try {
@@ -84,7 +84,8 @@ public class FranchiseServicie {
 
             if (resp == null) {
                 return new ErrorService(
-                        "No se encontró el detalle de productos con mayor stock por sucursal con Id:" + String.valueOf(idFranchise),
+                        "No se encontró el detalle de productos con mayor stock por sucursal con Id:"
+                                + String.valueOf(idFranchise),
                         "",
                         myClassName,
                         200);
@@ -97,6 +98,5 @@ public class FranchiseServicie {
                     myClassName);
         }
     }
-    
 
 }

@@ -128,7 +128,7 @@ public class FranchiseController {
 
             HttpStatus httpStatus = response.validateService(
                     resp,
-                    "Consulta de productos con mayor stock por sucursal, ok",
+                    "Consulta de productos con mayor stock por sucursal asociada a una franquicia, ok",
                     this.myClassName,
                     "",
                     req);

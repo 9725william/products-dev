@@ -48,27 +48,28 @@ public class ProductServicie {
 
     public Object update(Long id, ProductDto productDto) {
         try {
-            Object franchiseExist = ProductAdapter.getById(id);
-            if (UtilsService.isErrorService(franchiseExist)) {
-                return franchiseExist;
+            Object productExistObj = ProductAdapter.getById(id);
+            if (UtilsService.isErrorService(productExistObj)) {
+                return productExistObj;
             }
 
-            if (franchiseExist == null) {
+            if (productExistObj == null) {
                 return new ErrorService(
                         "El producto que intenta actualizar no existe",
                         "El producto con ID = " + id + " no existe",
                         myClassName);
             }
 
-            Product location = new Product();
-            location.setId(id);
-            location.setName(productDto.getName()); // Solo actualizar el Nombre del producto y fecha de actulización"
+            Product product = (Product) productExistObj;
+
+            // Solo actualiza el nombre del producto
+            product.setName(productDto.getName());
 
             String now = UtilsLocal.getDateTimeNow();
             Timestamp nowTimestamp = UtilsLocal.strDateToTimestamp(now, "yyyy-MM-dd HH:mm:ss");
-            location.setUpdated_at(nowTimestamp);
+            product.setUpdated_at(nowTimestamp);
 
-            Object resp = ProductAdapter.createOrUpdate(location);
+            Object resp = ProductAdapter.createOrUpdate(product);
             return resp;
         } catch (Exception e) {
             return new ErrorService(
@@ -80,27 +81,26 @@ public class ProductServicie {
 
     public Object updateStock(Long id, ProductDto productDto) {
         try {
-            Object franchiseExist = ProductAdapter.getById(id);
-            if (UtilsService.isErrorService(franchiseExist)) {
-                return franchiseExist;
+            Object existingProductObj = ProductAdapter.getById(id);
+            if (UtilsService.isErrorService(existingProductObj)) {
+                return existingProductObj;
             }
 
-            if (franchiseExist == null) {
+            if (existingProductObj == null) {
                 return new ErrorService(
                         "El producto que intenta actualizar no existe",
                         "El producto con ID = " + id + " no existe",
                         myClassName);
             }
 
-            Product location = new Product();
-            location.setId(id);
-            location.setStock(productDto.getStock()); // Solo actualizar el stock del producto y fecha de actulización"
+            Product existingProduct = (Product) existingProductObj;
+            existingProduct.setStock(productDto.getStock());
 
             String now = UtilsLocal.getDateTimeNow();
             Timestamp nowTimestamp = UtilsLocal.strDateToTimestamp(now, "yyyy-MM-dd HH:mm:ss");
-            location.setUpdated_at(nowTimestamp);
+            existingProduct.setUpdated_at(nowTimestamp);
 
-            Object resp = ProductAdapter.createOrUpdate(location);
+            Object resp = ProductAdapter.createOrUpdate(existingProduct);
             return resp;
         } catch (Exception e) {
             return new ErrorService(
@@ -129,8 +129,7 @@ public class ProductServicie {
             return new ErrorService(
                     "Ha ocurrido un error eliminando el producto",
                     e.getMessage(),
-                    myClassName
-            );
+                    myClassName);
         }
     }
 

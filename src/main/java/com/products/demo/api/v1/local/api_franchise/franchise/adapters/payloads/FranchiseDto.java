@@ -4,19 +4,14 @@ import jakarta.validation.constraints.NotBlank;
 
 public class FranchiseDto {
 
-    @NotBlank(message = "El nombre de la franquicia no puede estar vacío")
     private String name;
 
-    @NotBlank(message = "El país no puede estar vacío")
     private String country;
 
-    @NotBlank(message = "La ciudad no puede estar vacía")
     private String city;
 
-    @NotBlank(message = "El municipio no puede estar vacío")
     private String municipality;
 
-    @NotBlank(message = "La dirección no puede estar vacía")
     private String address;
 
     public FranchiseDto() {
@@ -68,5 +63,4 @@ public class FranchiseDto {
                 + municipality + ", address=" + address + "]";
     }
 
-    
 }

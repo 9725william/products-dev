@@ -136,7 +136,7 @@ public class ProductCrontoller {
         }
 
         try {
-            Object resp = productServicie.update(id, payload);
+            Object resp = productServicie.updateStock(id, payload);
 
             HttpStatus httpStatus = response.validateService(resp,
                     "Actualizacion de stock del producto, ok",
@@ -159,8 +159,7 @@ public class ProductCrontoller {
     @DeleteMapping("delete/{id}")
     public ResponseEntity<?> delete(
             @PathVariable Long id,
-            HttpServletRequest req
-    ) {
+            HttpServletRequest req) {
         String action = "delete";
         ResponseLocal response = new ResponseLocal(logFranchiseService, action);
         try {
@@ -170,8 +169,7 @@ public class ProductCrontoller {
                     "Producto eliminado",
                     this.myClassName,
                     "",
-                    req
-            );
+                    req);
             return new ResponseEntity(response, httpStatus);
         } catch (Exception e) {
             response.setError(HttpStatus.BAD_REQUEST.value(),
@@ -180,8 +178,7 @@ public class ProductCrontoller {
                     UtilsLocal.emptyErrorList(),
                     this.myClassName,
                     "",
-                    req
-            );
+                    req);
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
     }

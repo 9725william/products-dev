@@ -2,17 +2,13 @@ package com.products.demo.api.v1.local.api_franchise.product.adapters.payloads;
 
 import jakarta.validation.constraints.*;
 
-
 public class ProductDto {
 
-    @NotBlank(message = "El nombre de la franquicia no puede estar vacío")
     private String name;
 
-    @NotNull(message = "el stock del prodcuto no puede estar vacío")
     private Long stock;
 
-    @NotNull(message = "el identidicador de la sucursal no puede estar vacío")
-    private Long sucursal_id ;
+    private Long sucursal_id;
 
     public ProductDto() {
     }
@@ -45,7 +41,5 @@ public class ProductDto {
     public String toString() {
         return "ProductDto [name=" + name + ", stock=" + stock + ", sucursal_id=" + sucursal_id + "]";
     }
-
-    
 
 }
