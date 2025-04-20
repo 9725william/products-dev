@@ -8,7 +8,6 @@ public class FranchiseStock {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
     private String sucursal_name;
 
@@ -17,14 +16,6 @@ public class FranchiseStock {
     private Long stock;
 
     public FranchiseStock() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getSucursal_name() {
@@ -51,12 +42,4 @@ public class FranchiseStock {
         this.stock = stock;
     }
 
-    @Override
-    public String toString() {
-        return "FranchiseStock [id=" + id + ", sucursal_name=" + sucursal_name + ", product_name=" + product_name
-                + ", stock=" + stock + "]";
-    }
-
-    
-    
 }

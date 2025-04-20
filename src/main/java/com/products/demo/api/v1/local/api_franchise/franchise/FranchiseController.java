@@ -117,7 +117,7 @@ public class FranchiseController {
     @GetMapping("by-topStock/{id}")
     public ResponseEntity<?> franchiseTopStock(
 
-            @PathVariable Long idFranchise,
+            @PathVariable("id") Long idFranchise,
             HttpServletRequest req) {
 
         String action = "getByIdSchema";
@@ -145,6 +145,5 @@ public class FranchiseController {
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
 
 }
