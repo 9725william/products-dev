@@ -17,7 +17,7 @@ import jakarta.servlet.http.HttpServletRequest;
 @RestController
 @RequestMapping("/local/api-franchise/tests")
 @CrossOrigin
-@Tag(name = "Usuarios", description = "test de comprobacion para verificar que la aplicacion este disponible ")
+@Tag(name = "Test", description = "test de comprobacion para verificar que la aplicacion este disponible ")
 public class TestController {
 
     @Value("${enviroment.current}")

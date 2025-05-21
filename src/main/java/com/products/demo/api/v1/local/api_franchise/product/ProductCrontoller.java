@@ -26,7 +26,7 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping("local/api-product/")
 @CrossOrigin
-@Tag(name = "Usuarios", description = "Operaciones relacionadas con los productos")
+@Tag(name = "productos", description = "Operaciones relacionadas con los productos")
 public class ProductCrontoller {
 
     private String myClassName = ProductCrontoller.class.getName();
