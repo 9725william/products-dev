@@ -18,12 +18,15 @@ import com.products.demo.api.v1.local.api_franchise.logs_franchise.LogFranchiseS
 import com.products.demo.api.v1.local.api_franchise.utils.ResponseLocal;
 import com.products.demo.api.v1.local.api_franchise.utils.UtilsLocal;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("local/api-franchise/")
 @CrossOrigin
+@Tag(name = "sucursales", description = "Operaciones relacionadas con sucursales y franqucias")
 public class FranchiseController {
 
     private String myClassName = FranchiseController.class.getName();
@@ -35,6 +38,10 @@ public class FranchiseController {
     LogFranchiseService logFranchiseService;
 
     @PostMapping("create")
+    @Operation(
+            summary = "creacion de sucursal",
+            description = "Retorna un objto con status 200 al momento de crear una sucursal"
+        )
     public ResponseEntity<?> create(
             @Valid @RequestBody FranchiseDto payload,
             BindingResult bindingResult,
@@ -74,6 +81,10 @@ public class FranchiseController {
     }
 
     @PutMapping(path = "update/{id}")
+    @Operation(
+            summary = "actualizacion de sucursal",
+            description = "Retorna un objto con status 200 al momento de actualizar una sucursal por su id"
+        )
     public ResponseEntity<?> update(
             @PathVariable Long id,
             @Valid @RequestBody FranchiseDto payload,
@@ -115,6 +126,14 @@ public class FranchiseController {
     }
 
     @GetMapping("by-topStock/{id}")
+    @Operation(
+            summary = "mostrar cual es el producto que\r\n"
+            		+ "más stock tiene por sucursal para una franquicia puntual",
+            description = "Retorna un objto con status 200 al momento uncionalidad que, a partir del ID de una franquicia, permite filtrar\r\n"
+            		+ "las sucursales asociadas. Dentro de cada sucursal, se realiza un filtrado de\r\n"
+            		+ "productos por nombre, mostrando aquellos con mayor cantidad en inventario de\r\n"
+            		+ "cada una de las sucursales vinculadas a la franquicia"
+        )
     public ResponseEntity<?> franchiseTopStock(
 
             @PathVariable("id") Long idFranchise,

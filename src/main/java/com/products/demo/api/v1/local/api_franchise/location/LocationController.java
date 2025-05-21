@@ -17,12 +17,15 @@ import com.products.demo.api.v1.local.api_franchise.logs_franchise.LogFranchiseS
 import com.products.demo.api.v1.local.api_franchise.utils.ResponseLocal;
 import com.products.demo.api.v1.local.api_franchise.utils.UtilsLocal;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("local/api-location/")
 @CrossOrigin
+@Tag(name = "location", description = "puntos de distribucion franquicias")
 public class LocationController {
 
     private String myClassName = LocationController.class.getName();
@@ -34,6 +37,10 @@ public class LocationController {
     LogFranchiseService logFranchiseService;
 
     @PostMapping("create")
+    @Operation(
+            summary = "crear puntos de ventas",
+            description = "Retorna un objto con status 200 al momento de crear una franquicia"
+        )
     public ResponseEntity<?> create(
             @Valid @RequestBody LocationDto payload,
             BindingResult bindingResult,
@@ -74,6 +81,10 @@ public class LocationController {
     }
 
     @PutMapping(path = "update/{id}")
+    @Operation(
+            summary = "actualiza una fraquicia",
+            description = "Retorna un objeto al momento de actulzar una franquicia por su id"
+        )
     public ResponseEntity<?> update(
             @PathVariable Long id,
             @Valid @RequestBody LocationDto payload,

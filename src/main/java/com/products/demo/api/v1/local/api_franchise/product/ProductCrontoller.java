@@ -18,12 +18,15 @@ import com.products.demo.api.v1.local.api_franchise.product.adapters.payloads.Pr
 import com.products.demo.api.v1.local.api_franchise.utils.ResponseLocal;
 import com.products.demo.api.v1.local.api_franchise.utils.UtilsLocal;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("local/api-product/")
 @CrossOrigin
+@Tag(name = "Usuarios", description = "Operaciones relacionadas con los productos")
 public class ProductCrontoller {
 
     private String myClassName = ProductCrontoller.class.getName();
@@ -35,6 +38,10 @@ public class ProductCrontoller {
     LogFranchiseService logFranchiseService;
 
     @PostMapping("create")
+    @Operation(
+            summary = "crea un producto",
+            description = "Retorna un objeto al momento de crear un producto"
+        )
     public ResponseEntity<?> create(
             @Valid @RequestBody ProductDto payload,
             BindingResult bindingResult,
@@ -75,6 +82,10 @@ public class ProductCrontoller {
     }
 
     @PutMapping(path = "update/{id}")
+    @Operation(
+            summary = "actualiza un producto",
+            description = "Retorna un objeto al momento de actulizar un prodcuto por su id"
+        )
     public ResponseEntity<?> update(
             @PathVariable Long id,
             @Valid @RequestBody ProductDto payload,
@@ -116,6 +127,10 @@ public class ProductCrontoller {
     }
 
     @PutMapping(path = "update-sotock/{id}")
+    @Operation(
+            summary = "actualiza el stock de un producto",
+            description = "Retorna un objeto al momento de actualizar el stock de un producto por su id"
+        )
     public ResponseEntity<?> updateStock(
             @PathVariable Long id,
             @Valid @RequestBody ProductDto payload,
@@ -157,6 +172,10 @@ public class ProductCrontoller {
     }
 
     @DeleteMapping("delete/{id}")
+    @Operation(
+            summary = "elimina un producto",
+            description = "Retorna un objeto al momento de eliminar un producto por su id"
+        )
     public ResponseEntity<?> delete(
             @PathVariable Long id,
             HttpServletRequest req) {
