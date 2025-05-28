@@ -58,4 +58,16 @@ public class ProductAdapter {
 			);
 		}
 	}
+
+    public Object getAll() {
+        try {
+            Object resp = productRepository.findAll();
+            return resp;
+        } catch (Exception e) {
+            return new ErrorService(
+                    "Ha ocurrido un error obteniendo los registros de los productos",
+                    e.getMessage(),
+                    myClassName);
+        }
+    }
 }

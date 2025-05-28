@@ -132,5 +132,37 @@ public class ProductServicie {
                     myClassName);
         }
     }
+    public Object getById(Long id) {
+        try {
+
+            Object resp = ProductAdapter.getById(id);
+
+            if (resp == null) {
+                return new ErrorService(
+                        "No se encontró el registro con ID:" + String.valueOf(id),
+                        "",
+                        myClassName,
+                        200);
+            }
+            return resp;
+        } catch (Exception e) {
+            return new ErrorService(
+                    "Ha ocurrido un error obteniendo el prducto",
+                    e.getMessage(),
+                    myClassName);
+        }
+    }
+
+    public Object getAll() {
+        try {
+            Object resp = ProductAdapter.getAll();
+            return resp;
+        } catch (Exception e) {
+            return new ErrorService(
+                    "Ha ocurrido un error obteniendo la lista de productos",
+                    e.getMessage(),
+                    myClassName);
+        }
+    }
 
 }

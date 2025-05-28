@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -201,4 +202,74 @@ public class ProductCrontoller {
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
     }
+
+    @GetMapping("by-id/{id}")
+    @Operation(
+        summary = "Consulta un productos activos por su id",
+        description = "Retorna un objeto con un producto por su id"
+    )
+    public ResponseEntity<Object> getById(
+
+            @PathVariable Long id,
+            HttpServletRequest req) {
+
+        String action = "getById";
+        ResponseLocal response = new ResponseLocal(logFranchiseService, action);
+
+        try {
+            Object resp = productServicie.getById(id);
+
+            HttpStatus httpStatus = response.validateService(
+                    resp,
+                    "Consulta por producto filtrado, ok",
+                    this.myClassName,
+                    "",
+                    req);
+            return new ResponseEntity<>(response, httpStatus);
+        } catch (Exception e) {
+            response.setError(
+                    HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                    "No se pudo obtener el producto que se filtro",
+                    e.getMessage(),
+                    UtilsLocal.emptyErrorList(),
+                    this.myClassName,
+                    "",
+                    req);
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("all")
+    @Operation(
+        summary = "Consulta todos los productos",
+        description = "Retorna un listado de objetos de todos los productos registrados activos o no activos"
+    )
+    public ResponseEntity<Object> getAll(HttpServletRequest req) {
+
+        String action = "getAll";
+        ResponseLocal response = new ResponseLocal(logFranchiseService, action);
+
+        try {
+            Object resp = productServicie.getAll();
+
+            HttpStatus httpStatus = response.validateService(
+                    resp,
+                    "Consulta de áreas, ok",
+                    this.myClassName,
+                    "",
+                    req);
+            return new ResponseEntity<>(response, httpStatus);
+        } catch (Exception e) {
+            response.setError(
+                    HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                    "No se pudo obtener la lista de áreas",
+                    e.getMessage(),
+                    UtilsLocal.emptyErrorList(),
+                    this.myClassName,
+                    "",
+                    req);
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }
