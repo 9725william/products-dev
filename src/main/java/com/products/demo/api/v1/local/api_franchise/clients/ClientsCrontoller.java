@@ -21,7 +21,7 @@ import jakarta.servlet.http.HttpServletRequest;
 @RestController
 @CrossOrigin
 @Tag(name = "clientes", description = "servicio de consulta de clientes con datos quemados")
-@RequestMapping("local/api-clients/")
+@RequestMapping("/local/")
 public class ClientsCrontoller {
 
     private String myClassName = ClientsCrontoller.class.getName();
@@ -32,7 +32,7 @@ public class ClientsCrontoller {
     @Autowired
     LogFranchiseService logFranchiseService;
 
-    @GetMapping("/consult/{tipo}/{numero}")
+    @GetMapping("/consult/{documentType}/{documentNumber}")
     @Operation(
             summary = "consulta de informacion de cliente",
             description = "Retorna un objto con status 200 al momento de consultar un usuario"
